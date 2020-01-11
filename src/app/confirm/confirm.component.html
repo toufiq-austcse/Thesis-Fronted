@@ -1,0 +1,13 @@
+<div class="modal-header text-center" >
+  <h4 class="modal-title pull-left" >Confirmation</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  This schedule notification will be deleted. Are you sure?
+</div>
+<div class="modal-footer justify-content-center">
+  <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Cancel</button>
+  <button type="button" class="btn btn-primary" (click)="deleteNotification()">Confirm</button>
+</div>

@@ -1,0 +1,73 @@
+.customNotiImg {
+  position: absolute;
+  width: 272px;
+  top: 80px;
+  left: 20.8%;
+}
+.noti-container {
+  position: absolute;
+  height: 160px;
+  width: 272px;
+  top: 191px;
+  left: 20.8%;
+  background: #8C8B8B;
+}
+.noti-div {
+  position: relative;
+  background: #fff;
+  top: 4px;
+  left: 3.2px;
+  width: 265px;
+  height: 150px;
+  border-radius: 5px;
+}
+.noti-thumb {
+  width:20px;
+  height: 20px;
+  float:left;
+  border-radius: 2px;
+}
+.noti-head-name, .noti-head-name2 {
+  font-size: 9px;
+  font-weight: bold;
+  float: left;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+.noti-head-name2 {
+  font-size: 8px;
+}
+.noti-logo {
+  height: 30px;
+  border-radius: 50%;
+}
+.noti-title {
+  font-weight: 350;
+  font-size: 7.5px;
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.noti-body {
+  width: 200px;
+  font-size: 7px;
+}
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  cursor: inherit;
+  display: block;
+}

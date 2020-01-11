@@ -1,0 +1,7 @@
+<nav class="navbar fixed-top" style="background: #222222; height: 7vh;" *ngIf="isShowSidebar">
+  <i class="fas fa-user-secret fa-15 mr-2" style="visibility: hidden;"></i>
+  <a class="text-white" href="" (click)="logout()">Logout</a>
+</nav>
+
+<nav class="navbar fixed-top" style="background: #222222; height: 7vh;justify-content: center;" *ngIf="!isShowSidebar">
+</nav>

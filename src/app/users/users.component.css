@@ -1,0 +1,6 @@
+td, th {
+    vertical-align: middle!important;
+  }
+th {
+    text-align: center!important;
+}

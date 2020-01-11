@@ -1,0 +1,24 @@
+
+<div *ngIf="isShowSidebar">
+  <nav id="sidebar">
+    <ul class="list-unstyled components">
+      <li>
+
+        <a class="dropdown-toggle" (click)="showLi($event.target)">Comparison</a>
+        <ul class="collapse list-unstyled show">
+          <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <a routerLink="datasetcomperison">Dataset</a>
+          </li>
+          <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <a routerLink="zilabasedcompersion">District Based</a>
+          </li>
+          <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <a routerLink="monthbasedcompersion">Month Based </a>
+          </li> <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <a routerLink="yearrangecompersion">Year Range </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div>

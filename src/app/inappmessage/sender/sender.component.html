@@ -1,0 +1,172 @@
+<div class="row ">
+  <div class="col-md-7 col-sm-12">
+    <h4 class="text-center">New In App Message</h4>
+    <form #notificationForm="ngForm" (ngSubmit)="createNotification(notificationForm)">
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="panel panel-primary">
+            <div class="panel-body">
+              <div class="row m-0">
+                <div class="col-md-6 pl-0">
+                  Audience:
+                  <div class="ml-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="targetAudience" id="audiAll"
+                             [(ngModel)]="targetAudience" value="Everyone" (click)="onEveryone()">
+                      <label class="form-check-label" for="audiAll">
+                        Everyone
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="targetAudience" id="audiClass"
+                             [(ngModel)]="targetAudience" value="SpecificClass" (click)="onSpecificClass()">
+                      <label class="form-check-label" for="audiClass">
+                        Specific class
+                      </label>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-md-6" *ngIf="isSpecificClass === true && segements">
+                  <label>Select Class</label>
+                  <select name="segmentid" [(ngModel)]="segmentid"
+                          (change)="onSegmentSelectForVideo($event.target.value)" class="form-control form-control-md"
+                          style="margin-top: 2.2rem;">
+
+                    <option value="" disabled>Please select a class</option>
+                    <option value="1">প্রথম শ্রেনী</option>
+                    <option value="2">দ্বিতীয় শ্রেনী</option>
+                    <option value="3">তৃতীয় শ্রেনী</option>
+                    <option value="4">চতুর্থ শ্রেনী</option>
+                    <option value="5">পঞ্চম শ্রেনী</option>
+                    <option value="6">ষষ্ঠ শ্রেনী</option>
+                    <option value="7">সপ্তম শ্রেনী</option>
+                    <option value="8">জেএসসি</option>
+                    <option value="9">এস এস সি</option>
+                    <option value="10">এইচ এস সি</option>
+                    <option value="11">Admission</option>
+                  </select>
+
+                  <select class="form-control form-control-md" *ngIf="isEngagement === true"
+                          style="margin-top: 2.2rem;">
+                    <option value="" disabled>Please select audience</option>
+                    <option value="0">Active</option>
+                    <option value="1">Inactive</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="panel panel-primary">
+            <div class="panel-body">
+
+
+              <div class="form-group">
+                <label for="btntext">Button Text</label>
+                <input type="text" [(ngModel)]="btntext" name="btntext" class="form-control" id="btntext">
+              </div>
+              <div class="form-group">
+                <label >Activity Open</label>
+                <select class="form-control form-control-md" [(ngModel)]="selectedActivity" name="activity">
+                  <option value="HOME">Home</option>
+                  <option value="VIDEO">Video</option>
+                </select>
+              </div>
+              <div class="form-group mt-2" *ngIf="appVersions">
+                <label>Target Version User</label>
+<!--                <select [(ngModel)]="selectedVersion" class="form-control form-control-md" name="version">-->
+<!--                  <option value="ALL">{{selectedVersion}}</option>-->
+<!--                </select>-->
+
+                <select [(ngModel)]="selectedVersion" class="form-control form-control-md" name="version">
+                  <option *ngFor="let version of appVersions" [value]="version.value" name="version">
+                    {{version.text}}
+                  </option>
+                </select>
+
+              </div>
+              <div class="form-group mt-3">
+                <label>Image(300*300):</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" (click)="onNoImage()" name="imgStatus"
+                         [(ngModel)]="imgStatus" id="noImg" value="NoImage">
+                  <label class="form-check-label" for="noImg">
+                    No image
+                  </label> <br>
+
+                  <input class="form-check-input" type="radio" name="imgStatus" [(ngModel)]="imgStatus" id="imgUpload"
+                         value="UploadImge" (click)="onImgUpload()">
+                  <label class="form-check-label" for="imgUpload">
+                    Upload
+                  </label>
+                </div>
+              </div>
+              <span *ngIf="isImageUpload === true">
+               <app-spinner *ngIf="isShowSpinner"></app-spinner>
+              <span *ngIf="isImageUpload === true">
+                <label>Select Image</label>
+                <input type="file"  name="image" (change)="handleFileInput($event.target.files)" class="form-control" id="image">
+              </span>
+
+              </span>
+
+              <div *ngIf="selectedActivity === 'VIDEO'">
+
+
+                <div class="form-group inline">
+                  <label for="videoid" class="mt-2">Youtube Video Id</label>
+                  <input type="text" placeholder="Video Id" [(ngModel)]="videoId" name="videoid"
+                         class="form-control" id="videoid">
+                </div>
+
+
+              </div>
+
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="card mt-3">
+        <div class="card-body">
+          <div class="panel">
+            <div class="panel-body">
+              TTL:
+              <div class="form-check form-check-inline ml-3">
+                <input class="form-check-input" [(ngModel)]="ttl" type="radio" name="ttl" id="oneHour" value="1">
+                <label class="form-check-label" for="oneHour">One hour</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" [(ngModel)]="ttl" name="ttl" id="twelveHr" value="12">
+                <label class="form-check-label" for="twelveHr">Twelve hour</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" [(ngModel)]="ttl" name="ttl" id="oneDay" value="24">
+                <label class="form-check-label" for="oneDay">One day</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" [(ngModel)]="ttl" name="ttl" id="threeDay" value="72">
+                <label class="form-check-label" for="threeDay">Three day</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col-md-12 text-center">
+          <button type="submit" class="btn btn-primary">Preview</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>

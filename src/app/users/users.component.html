@@ -1,0 +1,86 @@
+<div class="row" style="justify-content: center">
+  <div class="col-sm-3">
+    <div class="form-group">
+      <label for="distrcit1">District</label>
+      <select id="distrcit1" class="form-control form-control-sm" (change)="onDistrictSelect($event.target.value)">
+        <option>Select District</option>
+        <option Value="Dhaka">Dhaka</option>
+        <option value="Faridpur">Faridpur</option>
+        <option value="Gazipur">Gazipur</option>
+        <option value="Gopalganj">Gopalganj</option>
+        <option value="Madaripur">Madaripur</option>
+        <option value="Manikganj">Manikganj</option>
+        <option value="Munshiganj">Munshiganj</option>
+        <option value="Narsingdi">Narsingdi</option>
+        <option value="Kishoreganj">Kishoreganj</option>
+        <option value="Narayanganj">Narayanganj</option>
+        <option value="Rajbari">Rajbari</option>
+        <option value="Shariatpur">Shariatpur</option>
+        <option value="Tangail">Tangail</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="form-group">
+      <label for="year1">From Year</label>
+      <select id="year1" class="form-control form-control-sm" (change)="onStartYearSelect($event.target.value)">
+        <option>Select Year</option>
+        <option Value="2001">2001</option>
+        <option value="2002">2002</option>
+        <option value="2003">2003</option>
+        <option value="2004">2004</option>
+        <option value="2005">2005</option>
+        <option value="2006">2006</option>
+        <option value="2007">2007</option>
+        <option value="2008">2008</option>
+        <option value="2009">2009</option>
+        <option value="2010">2010</option>
+        <option value="2011">2011</option>
+        <option value="2012">2012</option>
+        <option value="2013">2013</option>
+        <option value="2014">2014</option>
+        <option value="2015">2015</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="form-group">
+      <label for="year2">To Year</label>
+      <select id="year2" class="form-control form-control-sm" (change)="onEndYearSelect($event.target.value)">
+        <option>Select Year</option>
+        <option Value="2001">2001</option>
+        <option value="2002">2002</option>
+        <option value="2003">2003</option>
+        <option value="2004">2004</option>
+        <option value="2005">2005</option>
+        <option value="2006">2006</option>
+        <option value="2007">2007</option>
+        <option value="2008">2008</option>
+        <option value="2009">2009</option>
+        <option value="2010">2010</option>
+        <option value="2011">2011</option>
+        <option value="2012">2012</option>
+        <option value="2013">2013</option>
+        <option value="2014">2014</option>
+        <option value="2015">2015</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-1">
+    <div class="form-group" style="margin-top: 25px">
+      <button class="form-control btn-info" (click)="viewData()">View</button>
+    </div>
+
+  </div>
+</div>
+
+<div class="row" style="justify-content: center">
+  <div class="col-sm-9">
+    <canvas baseChart [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"></canvas>
+
+  </div>
+</div>

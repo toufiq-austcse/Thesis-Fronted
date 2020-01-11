@@ -1,0 +1,110 @@
+
+<div class="row">
+  <div class="col-md-12">
+    <app-spinner *ngIf="isShowSpinner"></app-spinner>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover" *ngIf="messageDetails">
+        <tbody>
+
+        <tr>
+          <td><b>Version</b></td>
+          <td *ngIf="messageDetails.version">{{messageDetails.version}}</td>
+          <td *ngIf="!messageDetails.version">Not Specified</td>
+        </tr>
+        <tr>
+          <td><b>Image URL</b></td>
+          <td *ngIf="messageDetails.imageUrl;else NOIMAGEBLOG">
+            <img src="{{messageDetails.imageUrl}}" alt="Image" srcset="" width="25%" height="25%">
+          </td>
+          <ng-template #NOIMAGEBLOG>
+            <td>NO Image</td>
+          </ng-template>
+        </tr>
+        <tr>
+          <td><b>Type</b></td>
+          <td>{{getMessageType(messageDetails.isOpenVideoPlayerActivity)}}</td>
+        </tr>
+        <tr>
+          <td><b>Recepients</b></td>
+          <td >{{getSegmentName(messageDetails.segmentId)}}</td>
+        </tr>
+        <tr>
+          <td><b>Button Text</b></td>
+          <td>{{messageDetails.buttonText}}</td>
+        </tr>
+        <tr>
+          <td><b>Button Activity</b></td>
+          <td>{{messageDetails.buttonActivity}}</td>
+        </tr>
+        <tr>
+          <td><b>Time</b></td>
+          <td>{{ getMessageTime(messageDetails.timeStamp) }} | {{ getMessageDate(messageDetails.timeStamp) }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <canvas id="piechart" class="piechart"></canvas>
+  </div>
+</div>
+<div class="row my-3 justify-content-center"  *ngIf="messageDetails">
+  <div class="col-md-3 col-sm-12">
+    <div class="card card-inverse card-info">
+      <div class="card-block bg-info">
+        <div class="rotate">
+          <i class="fas fa-share fa-5x"></i>
+        </div>
+        <h6 class="text-uppercase">Sent</h6>
+        <h5 class="display-1" >{{ messageDetails.successCount }}</h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-12">
+    <div class="card card-inverse card-success">
+      <div class="card-block bg-success">
+        <div class="rotate">
+          <i class="fas fa-hand-point-up fa-5x"></i>
+        </div>
+        <h6 class="text-uppercase">Impressions</h6>
+        <h5 class="display-1">{{ messageDetails.buttonClickedCount+ messageDetails.outsideClickedCount+messageDetails.closeButtonClicked}}</h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-12">
+    <div class="card card-inverse card-success">
+      <div class="card-block bg-success">
+        <div class="rotate">
+          <i class="fas fa-hand-point-up fa-5x"></i>
+        </div>
+        <h6 class="text-uppercase">Button</h6>
+        <h5 class="display-1">{{ messageDetails.buttonClickedCount }}</h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-12">
+    <div class="card card-inverse card-success">
+      <div class="card-block bg-info">
+        <div class="rotate">
+          <i class="fas fa-hand-point-up fa-5x"></i>
+        </div>
+        <h6 class="text-uppercase">Close</h6>
+        <h5 class="display-1">{{ messageDetails.closeButtonClicked }}</h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-12">
+    <div class="card card-inverse card-danger">
+      <div class="card-block bg-danger">
+        <div class="rotate">
+          <i class="fas fa-exclamation-triangle fa-5x"></i>
+        </div>
+        <h6 class="text-uppercase">Failed</h6>
+        <h5 class="display-1">{{ messageDetails.failedCount }}</h5>
+      </div>
+    </div>
+  </div>
+</div>

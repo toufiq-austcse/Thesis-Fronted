@@ -1,0 +1,59 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Preview</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" *ngIf="isShowSpinner===false;else SHOWSPINNER ">
+  Give it a thorough check!
+  <div class="col-12 text-center mt-3">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover" *ngIf="messageData">
+        <tbody>
+        <tr *ngIf="messageData.messageTitle">
+          <td class="text-left"><strong>Message Text:</strong></td>
+          <td class="text-center">{{messageData.messageTitle}}</td>
+        </tr>
+        <tr *ngIf="messageData.activityOpen ">
+          <td class="text-left"><strong>Activity Open:</strong></td>
+          <td class="text-center">{{messageData.activityOpen}}</td>
+        </tr>
+
+        <tr *ngIf="messageData.isOpenVideoPlayer">
+          <td class="text-left"><strong>Video Id:</strong></td>
+          <td class="text-center">{{messageData.buttonActivity}}</td>
+        </tr>
+
+        <tr *ngIf="messageData.segmentId">
+          <td class="text-left"><strong>Target Audience:</strong></td>
+          <td class="text-center">{{getSegmentname(messageData.segmentId)}}</td>
+        </tr>
+
+        <tr *ngIf="messageData.imageUrl">
+          <td class="text-left"><strong>Image URL:</strong></td>
+          <td class="text-center" *ngIf="messageData.imageUrl">
+            <img src="{{messageData.imageUrl}}" alt="Image" srcset="">
+          </td>
+          <td class="text-center" *ngIf="!messageData.imageUrl">No Image Selected</td>
+        </tr>
+        <tr *ngIf="messageData.ttlTime !== null">
+          <td class="text-left"><strong>Time To Live(Hr):</strong></td>
+          <td class="text-center">{{messageData.ttlTime}}</td>
+        </tr>
+        <tr *ngIf="messageData.version">
+          <td class="text-left"><strong>Target Version</strong></td>
+          <td class="text-center">{{messageData.version}}</td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<ng-template #SHOWSPINNER>
+  <app-spinner></app-spinner>
+</ng-template>
+<div class="modal-footer justify-content-center">
+  <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Edit</button>
+  <button type="button" class="btn btn-primary" (click)="sendNotification()">Send</button>
+</div>

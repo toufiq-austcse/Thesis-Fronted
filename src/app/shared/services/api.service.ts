@@ -20,9 +20,8 @@ export class ApiService {
     return this.http.get(url);
   }
 
-  getComparsionData(dataset1:any,dataset2:any,district:any){
-    const url = this.baseUrl+ '/api/data?district='+district+'&dataset1Title='+dataset1+'&dataset2Title='+dataset2;
-    console.log(url);
+  getComparsionData(district:any,year:any,month:any,day:any){
+    const url = this.baseUrl+ `/api/data?district=${district}&year=${year}&month=${month}&day=${day}`;
     return this.http.get(url);
   }
 

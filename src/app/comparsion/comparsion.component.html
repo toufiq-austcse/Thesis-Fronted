@@ -1,9 +1,12 @@
 <div class="container" style="text-align: center">
-  <div class="row">
-    <div class="col-sm-3">
-      <div class="form-group">
-        <label for="distrcit">District</label>
-        <select id="distrcit" class="form-control form-control-sm" (change)="onDistrictSelect($event.target.value)">
+
+  <form (ngSubmit)="onViewButtonClick(queryForm)" #queryForm = "ngForm">
+    <div class="row">
+      <div class="col-md-2">
+        <h4>Dataset 1</h4>
+      </div>
+      <div class="col-md-2">
+        <select id="distrcit1" ngModel name="district1" class="form-control form-control-sm" >
           <option>Select District</option>
           <option Value="Dhaka">Dhaka</option>
           <option value="Faridpur">Faridpur</option>
@@ -20,39 +23,133 @@
           <option value="Tangail">Tangail</option>
         </select>
       </div>
-
-    </div>
-
-    <div class="col-sm-3">
-      <div class="form-group">
-        <label for="Dataset1">Dataset 1</label>
-        <select id="Dataset1" [(ngModel)]="dataset1name" [name]="dataset1name" class="form-control form-control-sm">
-          <option *ngFor="let dataset of allDatasetNames" [value]="dataset">{{dataset}}</option>
+      <div class="col-md-2">
+        <div class="form-group">
+          <select id="year1"  ngModel name="year1" class="form-control form-control-sm" >
+            <option>Select Year</option>
+            <option Value="2001">2001</option>
+            <option value="2002">2002</option>
+            <option value="2003">2003</option>
+            <option value="2004">2004</option>
+            <option value="2005">2005</option>
+            <option value="2006">2006</option>
+            <option value="2007">2007</option>
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <select id="month1"  ngModel name="month1" class="form-control form-control-sm" (change)="onMonth1Select($event.target.value)">
+            <option>Select month</option>
+            <option Value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <select  class="form-control form-control-sm"  ngModel name="day1">
+          <option *ngFor="let day of days1" value="{{day}}">{{day}}</option>
         </select>
       </div>
 
     </div>
-    <div class="col-sm-3">
-      <div class="form-group">
-        <label for="Dataset2">Dataset 2</label>
-        <select id="Dataset2" [(ngModel)]="dataset2name" [name]="dataset2name" class="form-control form-control-sm">
-          <option *ngFor="let dataset of allDatasetNames" [value]="dataset">{{dataset}}</option>
+    <div class="row">
+      <div class="col-md-2">
+        <h4>Dataset 2</h4>
+      </div>
+      <div class="col-md-2">
+        <select id="district2" ngModel name="district2" class="form-control form-control-sm" >
+          <option>Select District</option>
+          <option Value="Dhaka">Dhaka</option>
+          <option value="Faridpur">Faridpur</option>
+          <option value="Gazipur">Gazipur</option>
+          <option value="Gopalganj">Gopalganj</option>
+          <option value="Madaripur">Madaripur</option>
+          <option value="Manikganj">Manikganj</option>
+          <option value="Munshiganj">Munshiganj</option>
+          <option value="Narsingdi">Narsingdi</option>
+          <option value="Kishoreganj">Kishoreganj</option>
+          <option value="Narayanganj">Narayanganj</option>
+          <option value="Rajbari">Rajbari</option>
+          <option value="Shariatpur">Shariatpur</option>
+          <option value="Tangail">Tangail</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <select id="year2"  ngModel name="year2" class="form-control form-control-sm">
+            <option>Select Year</option>
+            <option Value="2001">2001</option>
+            <option value="2002">2002</option>
+            <option value="2003">2003</option>
+            <option value="2004">2004</option>
+            <option value="2005">2005</option>
+            <option value="2006">2006</option>
+            <option value="2007">2007</option>
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <select id="month2" ngModel name="month2" class="form-control form-control-sm" (change)="onMonth2Select($event.target.value)">
+            <option>Select month</option>
+            <option Value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <select ngModel name="day2"  class="form-control form-control-sm">
+          <option *ngFor="let day of days2" value="{{day}}">{{day}}</option>
         </select>
       </div>
 
     </div>
-
-    <div class="col-sm-3">
-      <div class="form-group" style="margin-top: 25px">
-        <button class="form-control btn-info" (click)="showComparison()">Show Comparison</button>
-      </div>
-
+    <div class="row justify-content-center" >
+      <button type="submit" class="btn btn-info">View</button>
     </div>
-  </div>
+  </form>
 
-  <div *ngIf="comparisionResult">
+
+  <div *ngIf="comparisionResult.length>0">
     <div style="text-align: center">
-      <h4>Result for {{currentDistrict}}</h4>
+      <h4>Result for {{comparisionResult[0].dataset}}</h4>
     </div>
     <div class="row">
       <div class="col-sm-6">

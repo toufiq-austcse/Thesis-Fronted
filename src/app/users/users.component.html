@@ -74,13 +74,77 @@
   </div>
 </div>
 
-<div class="row" style="justify-content: center">
-  <div class="col-sm-9">
-    <canvas baseChart [datasets]="lineChartData"
-            [labels]="lineChartLabels"
-            [options]="lineChartOptions"
-            [legend]="lineChartLegend"
-            [chartType]="lineChartType"></canvas>
+<div class="row"  *ngIf="maxMinResult.length>0">
+  <div class="col-sm-3">
+    <figure>
+      <figcaption class="text-center">Minimum</figcaption>
+      <img [src]="maxMinResult[0].image" alt="image" style="max-height: 250px;max-width: 250px">
+    </figure>
 
+
+    <table class="table-bordered table-responsive">
+      <tr>
+        <td>Green Percentage</td>
+        <td>{{maxMinResult[0].greennessValue |number : '1.2-2'}}</td>
+      </tr>
+      <tr>
+        <td>Avg Ndvi</td>
+        <td>{{maxMinResult[0].avgNdvi|number : '1.2-2'}}</td>
+      </tr>
+      <tr>
+        <td>Year</td>
+        <td>{{maxMinResult[0].year}}</td>
+      </tr>
+      <tr>
+      <td>Month</td>
+      <td>{{maxMinResult[0].month}}</td>
+    </tr>
+      <tr>
+        <td>Day</td>
+        <td>{{maxMinResult[0].day}}</td>
+      </tr>
+
+    </table>
+  </div>
+  <div class="col-sm-6">
+    <div class="chart-container" style="position: relative;">
+      <canvas   baseChart [datasets]="lineChartData"
+               [labels]="lineChartLabels"
+               [options]="lineChartOptions"
+               [legend]="lineChartLegend"
+               [chartType]="lineChartType"></canvas>
+    </div>
+
+
+  </div>
+  <div class="col-sm-3" >
+    <figure>
+      <figcaption class="text-center">Maximum</figcaption>
+      <img [src]="maxMinResult[1].image" alt="image" style="max-height: 250px;max-width: 250px">
+    </figure>
+
+    <table class="table-bordered table-responsive">
+      <tr>
+        <td>Green Percentage</td>
+        <td>{{maxMinResult[1].greennessValue |number : '1.2-2'}}</td>
+      </tr>
+      <tr>
+        <td>Avg Ndvi</td>
+        <td>{{maxMinResult[1].avgNdvi|number : '1.2-2'}}</td>
+      </tr>
+      <tr>
+        <td>Year</td>
+        <td>{{maxMinResult[1].year}}</td>
+      </tr>
+      <tr>
+        <td>Month</td>
+        <td>{{maxMinResult[1].month}}</td>
+      </tr>
+      <tr>
+        <td>Day</td>
+        <td>{{maxMinResult[1].day}}</td>
+      </tr>
+
+    </table>
   </div>
 </div>

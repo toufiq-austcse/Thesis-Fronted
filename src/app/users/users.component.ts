@@ -9,6 +9,7 @@ import {ApiService} from "../shared/services/api.service";
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
+  maxMinResult:any[] = [];
   // lineChart
   public lineChartData: Array<any> = [
     {data: []},
@@ -117,6 +118,14 @@ export class UsersComponent implements OnInit {
      }
 
      console.log( this.lineChartData);
-    })
+    });
+    this.apiSerivice.getMaxMinData(this.district,this.startYear,this.endYear).subscribe(response =>{
+      this.maxMinResult = response;
+    },(err)=>{},()=>{
+      this.maxMinResult.forEach(result =>{
+        result.image = 'http://localhost:9090/'+this.district+"/"+result.image;
+      });
+      console.log(this.maxMinResult);
+    });
   }
 }

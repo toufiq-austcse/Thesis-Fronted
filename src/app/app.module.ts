@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -54,6 +54,7 @@ import {A11yModule} from "@angular/cdk/a11y";
   ],
   imports: [
     BrowserModule,
+    LeafletModule.forRoot(),
     AppRoutingModule,
     FormsModule,
     HttpClientModule,

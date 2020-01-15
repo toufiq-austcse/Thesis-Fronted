@@ -6,9 +6,9 @@
         <h4>Dataset 1</h4>
       </div>
       <div class="col-md-2">
-        <select id="distrcit1" ngModel name="district1" class="form-control form-control-sm" >
+        <select id="distrcit1"  (change)="onDistrict1Select($event.target.value)"  name="district1" class="form-control form-control-sm" >
           <option>Select District</option>
-          <option Value="Dhaka">Dhaka</option>
+          <option value="Dhaka">Dhaka</option>
           <option value="Faridpur">Faridpur</option>
           <option value="Gazipur">Gazipur</option>
           <option value="Gopalganj">Gopalganj</option>
@@ -25,9 +25,9 @@
       </div>
       <div class="col-md-2">
         <div class="form-group">
-          <select id="year1"  ngModel name="year1" class="form-control form-control-sm" >
+          <select id="year1"   (change)="onYear1Select($event.target.value)" name="year1" class="form-control form-control-sm" >
             <option>Select Year</option>
-            <option Value="2001">2001</option>
+            <option value="2001">2001</option>
             <option value="2002">2002</option>
             <option value="2003">2003</option>
             <option value="2004">2004</option>
@@ -47,9 +47,9 @@
       </div>
       <div class="col-md-2">
         <div class="form-group">
-          <select id="month1"  ngModel name="month1" class="form-control form-control-sm" (change)="onMonth1Select($event.target.value)">
+          <select id="month1"    name="month1" class="form-control form-control-sm" (change)="onMonth1Select($event.target.value)">
             <option>Select month</option>
-            <option Value="January">January</option>
+            <option value="January">January</option>
             <option value="February">February</option>
             <option value="March">March</option>
             <option value="April">April</option>
@@ -65,7 +65,8 @@
         </div>
       </div>
       <div class="col-md-2">
-        <select  class="form-control form-control-sm"  ngModel name="day1">
+        <select  class="form-control form-control-sm"  (change)="onDay1Select($event.target.value)" name="day1">
+          <option>Select Day</option>
           <option *ngFor="let day of days1" value="{{day}}">{{day}}</option>
         </select>
       </div>
@@ -76,9 +77,9 @@
         <h4>Dataset 2</h4>
       </div>
       <div class="col-md-2">
-        <select id="district2" ngModel name="district2" class="form-control form-control-sm" >
+        <select id="district2"  (change)="onDistrict2Select($event.target.value)" name="district2" class="form-control form-control-sm" >
           <option>Select District</option>
-          <option Value="Dhaka">Dhaka</option>
+          <option value="Dhaka">Dhaka</option>
           <option value="Faridpur">Faridpur</option>
           <option value="Gazipur">Gazipur</option>
           <option value="Gopalganj">Gopalganj</option>
@@ -95,9 +96,9 @@
       </div>
       <div class="col-md-2">
         <div class="form-group">
-          <select id="year2"  ngModel name="year2" class="form-control form-control-sm">
+          <select id="year2"   (change)="onYear2Select($event.target.value)" name="year2" class="form-control form-control-sm">
             <option>Select Year</option>
-            <option Value="2001">2001</option>
+            <option value="2001">2001</option>
             <option value="2002">2002</option>
             <option value="2003">2003</option>
             <option value="2004">2004</option>
@@ -117,9 +118,9 @@
       </div>
       <div class="col-md-2">
         <div class="form-group">
-          <select id="month2" ngModel name="month2" class="form-control form-control-sm" (change)="onMonth2Select($event.target.value)">
+          <select id="month2"  name="month2" class="form-control form-control-sm" (change)="onMonth2Select($event.target.value)">
             <option>Select month</option>
-            <option Value="January">January</option>
+            <option value="January">January</option>
             <option value="February">February</option>
             <option value="March">March</option>
             <option value="April">April</option>
@@ -135,7 +136,8 @@
         </div>
       </div>
       <div class="col-md-2">
-        <select ngModel name="day2"  class="form-control form-control-sm">
+        <select  (change)="onDay2Select($event.target.value)" name="day2"  class="form-control form-control-sm">
+          <option>Select Day</option>
           <option *ngFor="let day of days2" value="{{day}}">{{day}}</option>
         </select>
       </div>
@@ -147,29 +149,29 @@
   </form>
 
 
-  <div *ngIf="comparisionResult.length>0">
+  <div >
     <div style="text-align: center">
-      <h4>Result for {{comparisionResult[0].dataset}}</h4>
+<!--      <h4>Result for {{comparisionResult[0].dataset}}</h4>-->
     </div>
-    <div class="row">
+    <div class="row" *ngIf="comparisionResult1 && comparisionResult2">
       <div class="col-sm-6">
         <table class="table-responsive table-bordered">
           <tr>
             <td>Dataset Title</td>
-            <td>{{comparisionResult[0].dataset}}</td>
+            <td>{{comparisionResult1?.dataset}}</td>
           </tr>
           <tr>
             <td>Percent Of Green</td>
-            <td>{{comparisionResult[0].greennessValue | number : '1.2-2'}}%</td>
+            <td>{{comparisionResult1?.greennessValue | number : '1.2-2'}}%</td>
           </tr>
           <tr>
             <td>Avg NDVI</td>
-            <td>{{comparisionResult[0].avgNdvi |  number : '1.2-2'}}</td>
+            <td>{{comparisionResult1?.avgNdvi |  number : '1.2-2'}}</td>
           </tr>
           <tr>
             <td>Green Areas</td>
             <td>
-              <img [src]="comparisionResult[0].image" style="height: 300px;width: 300px">
+              <img [src]="comparisionResult1?.image" style="height: 300px;width: 300px">
             </td>
           </tr>
         </table>
@@ -178,21 +180,21 @@
         <table class="table-responsive table-bordered">
           <tr>
             <td>Dataset Title</td>
-            <td>{{comparisionResult[1].dataset}}</td>
+            <td>{{comparisionResult2?.dataset}}</td>
           </tr>
           <tr>
             <td>Percent Of Green</td>
-            <td>{{comparisionResult[1].greennessValue | number : '1.2-2'}}%</td>
+            <td>{{comparisionResult2?.greennessValue | number : '1.2-2'}}%</td>
           </tr>
           <tr>
             <td>Avg NDVI</td>
-            <td>{{comparisionResult[1].avgNdvi| number : '1.2-2'}}</td>
+            <td>{{comparisionResult2?.avgNdvi| number : '1.2-2'}}</td>
           </tr>
 
           <tr>
             <td>Green Areas</td>
             <td>
-              <img [src]="comparisionResult[1].image" style="height: 300px;width: 300px">
+              <img [src]="comparisionResult2?.image" style="height: 300px;width: 300px">
             </td>
           </tr>
         </table>

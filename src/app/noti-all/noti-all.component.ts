@@ -7,6 +7,7 @@ import {ConfirmComponent} from "../confirm/confirm.component";
 import {NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {FileuploadService} from "../fileupload.service";
 import {ApiService} from "../shared/services/api.service";
+import {LoadingComponent} from "../loading/loading.component";
 
 @Component({
   selector: 'app-noti-all',
@@ -15,8 +16,8 @@ import {ApiService} from "../shared/services/api.service";
 })
 export class NotiAllComponent implements OnInit {
   constructor(private apiSerivice: ApiService){}
-  private district:any;
-  private year:any;
+  private district:any = 'Dhaka';
+  private year:any = '2001';
 
   public barChartOptions:any = {
     scaleShowVerticalLines: false,
@@ -74,6 +75,7 @@ export class NotiAllComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.onViewData();
   }
 
   onViewData() {
@@ -83,6 +85,7 @@ export class NotiAllComponent implements OnInit {
     this.getData(this.district,this.year)
   }
   getData(district: any, year: any) {
+    LoadingComponent.display = true;
     this.apiSerivice.getDataOfAZila(district, year).subscribe(response => {
       let myResponse = response.map(aresponse => {
         return {
@@ -97,7 +100,7 @@ export class NotiAllComponent implements OnInit {
        this.barChartData[0].fillColor  = 'rgba(177,67,119,0.73)';
        this.barChartData[0].label = `${district}, ${year} Bar Graph of Green Percentage`
       })
-    });
+    },(err)=>{},()=> LoadingComponent.display = false);
 
 
   }

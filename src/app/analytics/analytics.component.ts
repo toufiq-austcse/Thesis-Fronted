@@ -3,6 +3,7 @@ import {Chart} from 'chart.js';
 import {NotiDataService} from '../noti-data.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import {ApiService} from "../shared/services/api.service";
+import {LoadingComponent} from "../loading/loading.component";
 
 
 @Component({
@@ -32,32 +33,7 @@ export class AnalyticsComponent implements OnInit {
 
   };
 
-  public lineChartColours: Array<any> = [
-    { // grey
-      //backgroundColor: 'rgb(50,177,107)',
-      borderColor: 'rgb(82,177,97)',
-      // pointBackgroundColor: 'rgba(148,159,177,1)',
-      // pointBorderColor: '#fff',
-      //  pointHoverBackgroundColor: '#fff',
-      // pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    // { // dark grey
-    //   //backgroundColor: 'rgb(65,42,50)',
-    //   borderColor: 'rgb(66,60,96)',
-    //   // pointBackgroundColor: 'rgba(77,83,96,1)',
-    //   //pointBorderColor: '#fff',
-    //   // pointHoverBackgroundColor: '#fff',
-    //   //pointHoverBorderColor: 'rgba(77,83,96,1)'
-    // },
-    // { // grey
-    //   // backgroundColor: 'rgba(148,159,177,0.2)',
-    //   borderColor: 'rgba(148,159,177,1)',
-    //   // pointBackgroundColor: 'rgba(148,159,177,1)',
-    //   // pointBorderColor: '#fff',
-    //   // pointHoverBackgroundColor: '#fff',
-    //   // pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    // }
-  ];
+
   public lineChartLegend = true;
   public lineChartType = 'line';
   notificationDetails: any;
@@ -65,19 +41,26 @@ export class AnalyticsComponent implements OnInit {
   notificationId: string;
   isShowSpinner: boolean = false;
   isScheduleNotification: boolean = false;
-  private district1: any;
-  private year1: any;
-  private year2: any;
-  private district2: any;
+  private district1: any = 'Dhaka';
+  private year1: any = '2001';
+  private year2: any = '2010';
+  private district2: any = 'Dhaka';
 
   constructor(private apiSerivice: ApiService) {
   }
 
   ngOnInit() {
+    this.lineChartLabels = [];
+    this.lineChartData = [
+      {data: [], label: 'X_Value'},
+      {data: [], label: 'Y_Value'},
+    ];
 
+    this.getData(this.district1, this.year1, this.district2, this.year2)
   }
 
   getData(district1: any, year1: any, district2: any, year2: any) {
+    LoadingComponent.display = true;
     this.apiSerivice.getDataOfAZila(district1, year1).subscribe(response => {
       let myResponse = response.map(aresponse => {
         return {
@@ -93,9 +76,12 @@ export class AnalyticsComponent implements OnInit {
         this.lineChartLabels.push(res.month);
         this.lineChartData[0].label = district1 + ", " + year1
       })
+    },(err)=>{},()=>{
+      LoadingComponent.display = false;
     });
-
+    LoadingComponent.display = true;
     this.apiSerivice.getDataOfAZila(district2, year2).subscribe(response => {
+      console.log(response);
       let myResponse = response.map(aresponse => {
         return {
           green_percentage: aresponse.green_percentage,
@@ -109,6 +95,8 @@ export class AnalyticsComponent implements OnInit {
         this.lineChartData[1].borderColor = 'rgb(102,102,255)';
         this.lineChartData[1].label = district2 + ", " + year2;
       })
+    },(err)=>{},()=>{
+      LoadingComponent.display = false;
     });
 
   }

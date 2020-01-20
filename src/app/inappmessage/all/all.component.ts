@@ -100,7 +100,7 @@ export class AllComponent implements OnInit {
 
   }
    onMarkerClick($event: any) {
-     window.location.href = 'http://localhost:4200/analytis/datasetcomperison'
+     window.location.href = 'http://localhost:4200/analytis/yearrangecompersion'
 
    // this.navigationService.isShowNavbar = true;
     //this._router.navigate(['analytis/datasetcomperison'])
@@ -140,7 +140,7 @@ export class AllComponent implements OnInit {
 
   onViewAnalyticsClick() {
    this.navigationService.isShowNavbar = true;
-   this._router.navigate(['analytis/datasetcomperison'])
+   this._router.navigate(['analytis/yearrangecompersion'])
   }
 
   onImageClick($event: MouseEvent) {

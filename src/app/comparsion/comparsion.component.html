@@ -1,14 +1,14 @@
 <div class="container" style="text-align: center">
 
-  <form (ngSubmit)="onViewButtonClick(queryForm)" #queryForm = "ngForm">
+  <form (ngSubmit)="onViewButtonClick(queryForm)" #queryForm="ngForm">
     <div class="row">
       <div class="col-md-2">
         <h4>Dataset 1</h4>
       </div>
       <div class="col-md-2">
-        <select id="distrcit1"  (change)="onDistrict1Select($event.target.value)"  name="district1" class="form-control form-control-sm" >
-          <option>Select District</option>
-          <option value="Dhaka">Dhaka</option>
+        <select id="distrcit1" (change)="onDistrict1Select($event.target.value)" name="district1"
+                class="form-control form-control-sm">
+          <option value="Dhaka" selected>Dhaka</option>
           <option value="Faridpur">Faridpur</option>
           <option value="Gazipur">Gazipur</option>
           <option value="Gopalganj">Gopalganj</option>
@@ -25,9 +25,9 @@
       </div>
       <div class="col-md-2">
         <div class="form-group">
-          <select id="year1"   (change)="onYear1Select($event.target.value)" name="year1" class="form-control form-control-sm" >
-            <option>Select Year</option>
-            <option value="2001">2001</option>
+          <select id="year1" (change)="onYear1Select($event.target.value)" name="year1"
+                  class="form-control form-control-sm">
+            <option value="2001" selected>2001</option>
             <option value="2002">2002</option>
             <option value="2003">2003</option>
             <option value="2004">2004</option>
@@ -47,9 +47,9 @@
       </div>
       <div class="col-md-2">
         <div class="form-group">
-          <select id="month1"    name="month1" class="form-control form-control-sm" (change)="onMonth1Select($event.target.value)">
-            <option>Select month</option>
-            <option value="January">January</option>
+          <select id="month1" name="month1" class="form-control form-control-sm"
+                  (change)="onMonth1Select($event.target.value)">
+            <option value="January" selected>January</option>
             <option value="February">February</option>
             <option value="March">March</option>
             <option value="April">April</option>
@@ -65,8 +65,7 @@
         </div>
       </div>
       <div class="col-md-2">
-        <select  class="form-control form-control-sm"  (change)="onDay1Select($event.target.value)" name="day1">
-          <option>Select Day</option>
+        <select class="form-control form-control-sm" (change)="onDay1Select($event.target.value)" name="day1">
           <option *ngFor="let day of days1" value="{{day}}">{{day}}</option>
         </select>
       </div>
@@ -77,9 +76,9 @@
         <h4>Dataset 2</h4>
       </div>
       <div class="col-md-2">
-        <select id="district2"  (change)="onDistrict2Select($event.target.value)" name="district2" class="form-control form-control-sm" >
-          <option>Select District</option>
-          <option value="Dhaka">Dhaka</option>
+        <select id="district2" (change)="onDistrict2Select($event.target.value)" name="district2"
+                class="form-control form-control-sm">
+          <option value="Dhaka" selected>Dhaka</option>
           <option value="Faridpur">Faridpur</option>
           <option value="Gazipur">Gazipur</option>
           <option value="Gopalganj">Gopalganj</option>
@@ -96,8 +95,8 @@
       </div>
       <div class="col-md-2">
         <div class="form-group">
-          <select id="year2"   (change)="onYear2Select($event.target.value)" name="year2" class="form-control form-control-sm">
-            <option>Select Year</option>
+          <select id="year2" (change)="onYear2Select($event.target.value)" name="year2"
+                  class="form-control form-control-sm">
             <option value="2001">2001</option>
             <option value="2002">2002</option>
             <option value="2003">2003</option>
@@ -112,15 +111,15 @@
             <option value="2012">2012</option>
             <option value="2013">2013</option>
             <option value="2014">2014</option>
-            <option value="2015">2015</option>
+            <option value="2015" selected>2015</option>
           </select>
         </div>
       </div>
       <div class="col-md-2">
         <div class="form-group">
-          <select id="month2"  name="month2" class="form-control form-control-sm" (change)="onMonth2Select($event.target.value)">
-            <option>Select month</option>
-            <option value="January">January</option>
+          <select id="month2" name="month2" class="form-control form-control-sm"
+                  (change)="onMonth2Select($event.target.value)">
+            <option value="January" selected>January</option>
             <option value="February">February</option>
             <option value="March">March</option>
             <option value="April">April</option>
@@ -136,30 +135,43 @@
         </div>
       </div>
       <div class="col-md-2">
-        <select  (change)="onDay2Select($event.target.value)" name="day2"  class="form-control form-control-sm">
-          <option>Select Day</option>
+        <select (change)="onDay2Select($event.target.value)" name="day2" class="form-control form-control-sm">
           <option *ngFor="let day of days2" value="{{day}}">{{day}}</option>
         </select>
       </div>
 
     </div>
-    <div class="row justify-content-center" >
+    <div class="row justify-content-center">
       <button type="submit" class="btn btn-info">View</button>
     </div>
   </form>
 
 
-  <div >
+  <div>
     <div style="text-align: center">
-<!--      <h4>Result for {{comparisionResult[0].dataset}}</h4>-->
+      <h4>Information</h4>
+      <!--      <h4>Result for {{comparisionResult[0].dataset}}</h4>-->
     </div>
-    <div class="row" *ngIf="comparisionResult1 && comparisionResult2">
+    <div class="row" style="margin-top: 15px" *ngIf="comparisionResult1 && comparisionResult2">
       <div class="col-sm-6">
         <table class="table-responsive table-bordered">
           <tr>
-            <td>Dataset Title</td>
-            <td>{{comparisionResult1?.dataset}}</td>
+            <td>District</td>
+            <td>{{comparisionResult1?.district}}</td>
           </tr>
+          <tr>
+            <td>Year</td>
+            <td>{{comparisionResult1?.year}}</td>
+          </tr>
+          <tr>
+            <td>Month</td>
+            <td>{{comparisionResult1?.month}}</td>
+          </tr>
+          <tr>
+            <td>Day</td>
+            <td>{{comparisionResult1?.day}}</td>
+          </tr>
+
           <tr>
             <td>Percent Of Green</td>
             <td>{{comparisionResult1?.greennessValue | number : '1.2-2'}}%</td>
@@ -179,8 +191,20 @@
       <div class="col-sm-6">
         <table class="table-responsive table-bordered">
           <tr>
-            <td>Dataset Title</td>
-            <td>{{comparisionResult2?.dataset}}</td>
+            <td>District</td>
+            <td>{{comparisionResult2?.district}}</td>
+          </tr>
+          <tr>
+            <td>Year</td>
+            <td>{{comparisionResult2?.year}}</td>
+          </tr>
+          <tr>
+            <td>Month</td>
+            <td>{{comparisionResult2?.month}}</td>
+          </tr>
+          <tr>
+            <td>Day</td>
+            <td>{{comparisionResult2?.day}}</td>
           </tr>
           <tr>
             <td>Percent Of Green</td>

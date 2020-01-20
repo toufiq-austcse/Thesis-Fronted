@@ -1,10 +1,10 @@
+<h4 style="text-align: center">Time Series Analysis of Greeenness for {{district}} from {{startYear}} to {{endYear}}</h4>
 <div class="row" style="justify-content: center">
   <div class="col-sm-3">
     <div class="form-group">
       <label for="distrcit1">District</label>
       <select id="distrcit1" class="form-control form-control-sm" (change)="onDistrictSelect($event.target.value)">
-        <option>Select District</option>
-        <option Value="Dhaka">Dhaka</option>
+        <option Value="Dhaka" selected>Dhaka</option>
         <option value="Faridpur">Faridpur</option>
         <option value="Gazipur">Gazipur</option>
         <option value="Gopalganj">Gopalganj</option>
@@ -24,8 +24,7 @@
     <div class="form-group">
       <label for="year1">From Year</label>
       <select id="year1" class="form-control form-control-sm" (change)="onStartYearSelect($event.target.value)">
-        <option>Select Year</option>
-        <option Value="2001">2001</option>
+        <option Value="2001" selected>2001</option>
         <option value="2002">2002</option>
         <option value="2003">2003</option>
         <option value="2004">2004</option>
@@ -47,7 +46,7 @@
     <div class="form-group">
       <label for="year2">To Year</label>
       <select id="year2" class="form-control form-control-sm" (change)="onEndYearSelect($event.target.value)">
-        <option>Select Year</option>
+
         <option Value="2001">2001</option>
         <option value="2002">2002</option>
         <option value="2003">2003</option>
@@ -62,7 +61,7 @@
         <option value="2012">2012</option>
         <option value="2013">2013</option>
         <option value="2014">2014</option>
-        <option value="2015">2015</option>
+        <option value="2015" selected>2015</option>
       </select>
     </div>
   </div>
@@ -74,7 +73,7 @@
   </div>
 </div>
 
-<div class="row"  *ngIf="maxMinResult.length>0">
+<div class="row"  *ngIf="maxMinResult.length>0" style="margin-left: -40px;justify-content: center">
   <div class="col-sm-3">
     <figure>
       <figcaption class="text-center">Minimum</figcaption>
@@ -106,18 +105,21 @@
 
     </table>
   </div>
-  <div class="col-sm-6">
-    <div class="chart-container" style="position: relative;">
+
+    <div class=" col-sm-6" style="margin-left: -45px">
       <canvas   baseChart [datasets]="lineChartData"
                [labels]="lineChartLabels"
                [options]="lineChartOptions"
                [legend]="lineChartLegend"
-               [chartType]="lineChartType"></canvas>
+               [chartType]="lineChartType">
+        <i>asd</i>
+      </canvas>
+
     </div>
 
 
-  </div>
   <div class="col-sm-3" >
+
     <figure>
       <figcaption class="text-center">Maximum</figcaption>
       <img [src]="maxMinResult[1].image" alt="image" style="max-height: 250px;max-width: 250px">

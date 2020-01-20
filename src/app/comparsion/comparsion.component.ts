@@ -17,39 +17,25 @@ export class ComparsionComponent implements OnInit {
   comparisionResult2:any;
 
   currentDistrict:any;
-  days1:string[];
-  days2:string[];
-  district1: any;
-  year1: any;
-  month1: any;
-  day1: any;
-  district2: any;
-  year2: any;
-  month2: any;
-  day2: any;
+  days1:string[] = ['001','017'];
+  days2:string[] =  ['001','017'];
+  district1: any = 'Dhaka';
+  year1: any = '2001';
+  month1: any = 'January';
+  day1: any = this.days1[0];
+
+  district2: any = 'Dhaka';
+  year2: any = '2015';
+  month2: any = 'January';
+  day2: any = this.days2[0];
 
   constructor(private apiService:ApiService) { }
 
   ngOnInit() {
+    this.getComparisonForDataset1(this.district1,this.year1,this.month1,this.day1);
+    this.getComparisonForDataset2(this.district2,this.year2,this.month2,this.day2);
 
   }
-
-  // showComparison() {
-  //   console.log(this.dataset1name);
-  //   console.log(this.dataset2name);
-  //   LoadingComponent.display = true;
-  //   this.apiService.getComparsionData(this.dataset1name,this.dataset2name,this.currentDistrict).subscribe((response)=>{
-  //     this.comparisionResult = response;
-  //
-  //   },(err)=>{},()=>{
-  //     this.comparisionResult.forEach(result =>{
-  //       result.image = 'http://localhost:9090/'+this.currentDistrict+"/"+result.image;
-  //     });
-  //
-  //     console.log(this.comparisionResult);
-  //     LoadingComponent.display = false;
-  //   })
-  // }
 
   onDistrictSelect(value: any) {
     this.currentDistrict = value;
@@ -65,11 +51,14 @@ export class ComparsionComponent implements OnInit {
   onMonth1Select(value: any) {
     this.month1 = value;
     this.days1 = this.getDays(value);
+    this.day1 = this.days1[0];
+  
   }
 
   onMonth2Select(value: any) {
     this.month2 = value;
     this.days2 = this.getDays(value);
+    this.day2 = this.days2[0];
   }
 
   getDays(monthName):string[]{
@@ -120,22 +109,33 @@ export class ComparsionComponent implements OnInit {
     this.comparisionResult1 = null;
     this.comparisionResult2 = null;
 
-    this.apiService.getComparsionData(this.district1,this.year1,this.month1,this.day1).subscribe(res=>{
+    this.getComparisonForDataset1(this.district1,this.year1,this.month1,this.day1);
+    this.getComparisonForDataset2(this.district2,this.year2,this.month2,this.day2);
+
+  }
+
+  getComparisonForDataset1(district,year,month,day){
+    LoadingComponent.display = true;
+    this.apiService.getComparsionData(district,year,month,day).subscribe(res=>{
       console.log(res);
       this.comparisionResult1 = res;
       console.log(res);
     },(err)=>{},()=>{
+      LoadingComponent.display = false;
       this.comparisionResult1.image = 'http://localhost:9090/'+this.district1+"/"+this.comparisionResult1.image;
     });
+  }
 
-    this.apiService.getComparsionData(this.district2,this.year2,this.month2,this.day2).subscribe(res=>{
+  getComparisonForDataset2(district,year,month,day){
+    LoadingComponent.display = true;
+    this.apiService.getComparsionData(district,year,month,day).subscribe(res=>{
       console.log(res);
       this.comparisionResult2 = res;
     },(err)=>{},()=>{
+      LoadingComponent.display = false;
       this.comparisionResult2.image = 'http://localhost:9090/'+this.district2+"/"+this.comparisionResult2.image;
       console.log(this.comparisionResult2.image)
     });
-
   }
 
   onDistrict1Select(value: any) {

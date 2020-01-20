@@ -19,6 +19,8 @@ export class UsersComponent implements OnInit {
   public lineChartOptions: any = {
     animation: false,
     responsive: true,
+    title: {
+    },
     scales: {
       yAxes: [{
         ticks: {
@@ -26,7 +28,8 @@ export class UsersComponent implements OnInit {
           max: 100
         }
       }]
-    }
+    },
+    maintainAspectRatio:false
 
   };
 
@@ -63,12 +66,12 @@ export class UsersComponent implements OnInit {
   notificationId: string;
   isShowSpinner: boolean = false;
   isScheduleNotification: boolean = false;
-  private district: any;
-  private startYear: any;
-  private endYear: any;
+  private district: any = 'Dhaka';
+  private startYear: any = '2001';
+  private endYear: any = '2015';
 
   ngOnInit() {
-
+    this.viewData();
   }
   constructor(private apiSerivice: ApiService){
 
@@ -96,6 +99,7 @@ export class UsersComponent implements OnInit {
     return "rgb(" + r + "," + g + "," + b + ", 0.5)";
   }
 
+
   viewData() {
     this.lineChartData = [];
     this.apiSerivice.getYearRangeComparison(this.district,this.startYear,this.endYear).subscribe(response=>{
@@ -114,10 +118,14 @@ export class UsersComponent implements OnInit {
        data: yearData,fill:false,  borderColor: this.getRandomColor(),label: `${i} Year`,
        });
        console.log(i);
-       console.log(yearData)
+       console.log(yearData);
+
      }
 
      console.log( this.lineChartData);
+    },(err)=>{},()=>{
+      //this.lineChartOptions.title.text = `Graph shows the changes of greenness in ${this.district} from ${this.startYear}-${this.endYear}`;
+      //this.lineChartOptions.title.display = true;
     });
     this.apiSerivice.getMaxMinData(this.district,this.startYear,this.endYear).subscribe(response =>{
       this.maxMinResult = response;

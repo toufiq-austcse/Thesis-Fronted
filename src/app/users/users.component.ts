@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NotiDataService } from '../noti-data.service';
 import {NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {ApiService} from "../shared/services/api.service";
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-users',
@@ -17,7 +18,7 @@ export class UsersComponent implements OnInit {
   ];
   public lineChartLabels: Array<any> = ['January','February','March','April','May','June','July','August',"September",'October','November','December'];
   public lineChartOptions: any = {
-    animation: false,
+    animation: true,
     responsive: true,
     title: {
     },
@@ -69,6 +70,7 @@ export class UsersComponent implements OnInit {
   private district: any = 'Dhaka';
   private startYear: any = '2001';
   private endYear: any = '2015';
+  title = '';
 
   ngOnInit() {
     this.viewData();
@@ -101,6 +103,7 @@ export class UsersComponent implements OnInit {
 
 
   viewData() {
+    LoadingComponent.display = true;
     this.lineChartData = [];
     this.apiSerivice.getYearRangeComparison(this.district,this.startYear,this.endYear).subscribe(response=>{
      this.startYear = +this.startYear;
@@ -124,16 +127,21 @@ export class UsersComponent implements OnInit {
 
      console.log( this.lineChartData);
     },(err)=>{},()=>{
+      LoadingComponent.display = false;
       //this.lineChartOptions.title.text = `Graph shows the changes of greenness in ${this.district} from ${this.startYear}-${this.endYear}`;
       //this.lineChartOptions.title.display = true;
     });
+    LoadingComponent.display = true;
     this.apiSerivice.getMaxMinData(this.district,this.startYear,this.endYear).subscribe(response =>{
       this.maxMinResult = response;
     },(err)=>{},()=>{
       this.maxMinResult.forEach(result =>{
         result.image = 'http://localhost:9090/'+this.district+"/"+result.image;
       });
+      LoadingComponent.display = false;
       console.log(this.maxMinResult);
     });
+
+    this.title = `Time Series Analysis of Greeenness for ${this.district} from ${this.startYear} to ${this.endYear}`;
   }
 }

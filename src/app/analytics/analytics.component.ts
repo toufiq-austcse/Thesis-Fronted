@@ -46,6 +46,8 @@ export class AnalyticsComponent implements OnInit {
   private year2: any = '2010';
   private district2: any = 'Dhaka';
 
+  title:string = '';
+
   constructor(private apiSerivice: ApiService) {
   }
 
@@ -98,6 +100,8 @@ export class AnalyticsComponent implements OnInit {
     },(err)=>{},()=>{
       LoadingComponent.display = false;
     });
+
+    this.title = `District based greenness compersion between ${this.district1}, ${this.year1} and ${this.district2}, ${this.year2}`;
 
   }
 
